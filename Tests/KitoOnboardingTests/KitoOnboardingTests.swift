@@ -7,6 +7,8 @@
 //
 
 import XCTest
+import SwiftUI
+import KitoCore
 @testable import KitoOnboarding
 
 @MainActor
@@ -38,5 +40,28 @@ final class KitoOnboardingTests: XCTestCase {
         viewModel.skip()
         XCTAssertTrue(finished)
         XCTAssertEqual(viewModel.currentIndex, 0)
+    }
+
+    func testPageBackgroundDefaultsToNil() {
+        XCTAssertNil(KitoOnboardingPage(systemImage: "star", title: "T", message: "M").background)
+    }
+
+    func testPageCanCarryABackgroundImageOrGradient() {
+        let gradientPage = KitoOnboardingPage(systemImage: "star", title: "T", message: "M", background: .gradient(.linear(.purple, .indigo)))
+        guard case .gradient(let gradient) = gradientPage.background else {
+            return XCTFail("expected .gradient")
+        }
+        XCTAssertEqual(gradient.colors, [.purple, .indigo])
+
+        let imagePage = KitoOnboardingPage(systemImage: "star", title: "T", message: "M", background: .image(.systemImage("mountain.2.fill")))
+        guard case .image(let image, _) = imagePage.background, case .systemImage(let name) = image else {
+            return XCTFail("expected .image(.systemImage)")
+        }
+        XCTAssertEqual(name, "mountain.2.fill")
+    }
+
+    func testStyleDefaultsToBottomFullWidthAndSlide() {
+        let style = KitoOnboardingStyle.default
+        XCTAssertEqual(style.buttonPlacement, .bottomFullWidth)
     }
 }
