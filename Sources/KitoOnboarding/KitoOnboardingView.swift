@@ -34,7 +34,7 @@ public struct KitoOnboardingView: View {
     }
     /// On `.card` the footer sits on the card, not the page background.
     private var footerForeground: Color {
-        style.layout == .card ? theme.colors.onSurface : headerForeground
+        style.layout == .card ? (style.cardForeground ?? theme.colors.onSurface) : headerForeground
     }
 
     public var body: some View {
@@ -258,6 +258,7 @@ struct OnboardingPageView: View {
 
     private var foreground: Color { Self.foreground(for: page, layout: style.layout, theme: theme) }
     private var accent: Color { page.accent ?? theme.colors.primary }
+    private var cardForeground: Color { style.cardForeground ?? theme.colors.onSurface }
     private var parallax: Bool { style.pageTransition == .parallax && motionEnabled }
     /// Room for the floating header and footer.
     private var topInset: CGFloat { max(insets.top, theme.spacing.sm) + (style.indicator == .progressBar ? 64 : 52) }
@@ -336,8 +337,8 @@ struct OnboardingPageView: View {
                     .padding(.top, topInset)
                     .padding(.bottom, theme.spacing.xl)
                 VStack(spacing: theme.spacing.lg) {
-                    Capsule().fill(theme.colors.onSurface.opacity(0.15)).frame(width: 40, height: 5)
-                    textBlock(alignment: .center, color: theme.colors.onSurface)
+                    Capsule().fill(cardForeground.opacity(0.15)).frame(width: 40, height: 5)
+                    textBlock(alignment: .center, color: cardForeground)
                 }
                 .padding(.horizontal, theme.spacing.xl)
                 .padding(.top, theme.spacing.md)
@@ -345,7 +346,7 @@ struct OnboardingPageView: View {
                 .frame(maxWidth: .infinity)
                 .background(
                     UnevenRoundedRectangle(topLeadingRadius: 36, topTrailingRadius: 36, style: .continuous)
-                        .fill(theme.colors.surface)
+                        .fill(style.cardColor ?? theme.colors.surface)
                         .shadow(color: .black.opacity(0.12), radius: 24, y: -4)
                 )
             }

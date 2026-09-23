@@ -126,6 +126,8 @@ final class KitoOnboardingTests: XCTestCase {
         XCTAssertEqual(style.artworkMotion, .none)
         XCTAssertTrue(style.showsSkip)
         XCTAssertFalse(style.showsBackButton)
+        XCTAssertNil(style.cardColor, "the card follows the theme's surface")
+        XCTAssertNil(style.cardForeground)
         XCTAssertEqual(style.labels, KitoOnboardingLabels(next: "Next", getStarted: "Get started", skip: "Skip", back: "Back"))
     }
 

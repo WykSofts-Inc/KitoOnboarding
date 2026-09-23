@@ -106,6 +106,10 @@ public struct KitoOnboardingStyle: Sendable {
     public var showsSkip: Bool
     /// A back chevron in the top-leading corner after the first page.
     public var showsBackButton: Bool
+    /// The `.card` layout's card colour and text colour; nil uses `theme.colors.surface` and
+    /// `theme.colors.onSurface`.
+    public var cardColor: Color?
+    public var cardForeground: Color?
 
     public init(
         buttonPlacement: KitoOnboardingButtonPlacement = .bottomFullWidth,
@@ -115,7 +119,9 @@ public struct KitoOnboardingStyle: Sendable {
         artworkMotion: KitoOnboardingArtworkMotion = .none,
         labels: KitoOnboardingLabels = KitoOnboardingLabels(),
         showsSkip: Bool = true,
-        showsBackButton: Bool = false
+        showsBackButton: Bool = false,
+        cardColor: Color? = nil,
+        cardForeground: Color? = nil
     ) {
         self.buttonPlacement = buttonPlacement
         self.pageTransition = pageTransition
@@ -125,6 +131,8 @@ public struct KitoOnboardingStyle: Sendable {
         self.labels = labels
         self.showsSkip = showsSkip
         self.showsBackButton = showsBackButton
+        self.cardColor = cardColor
+        self.cardForeground = cardForeground
     }
 
     public static let `default` = KitoOnboardingStyle()
