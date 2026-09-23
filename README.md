@@ -25,6 +25,33 @@ page indicator.
 KitoOnboardingView(viewModel: onboarding)
 ```
 
+**Illustrated pages, a layout, a transition and a progress-ring button:**
+```swift
+let pages = [
+    KitoOnboardingPage(eyebrow: "Discover", title: "Find what you love", message: "Thousands of picks, sorted for you.", accent: .orange) {
+        MyIllustration()                     // any view: an image, a drawing, an animation
+    },
+    KitoOnboardingPage(artwork: .none, title: "See the world", message: "Guides from locals.",
+                       background: .image(.url(photoURL), overlayTint: .black.opacity(0.2)),
+                       accent: .white, onAccent: .black),
+]
+
+KitoOnboardingView(viewModel: KitoOnboardingViewModel(pages: pages), style: KitoOnboardingStyle(
+    buttonPlacement: .progressRing,          // .bottomFullWidth, .bottomTrailingCompact, .topTrailingCompact
+    pageTransition: .parallax,               // .slide, .fade, .scaleFade, .cube, .zoom
+    layout: .fullBleed,                      // .centered, .heroTop, .card, .textFirst
+    indicator: .progressBar,                 // .capsules, .dots, .numbered, .none
+    artworkMotion: .float,                   // .bounce, .pulse
+    labels: KitoOnboardingLabels(next: "Continue", getStarted: "Let's go"),
+    showsBackButton: true
+))
+```
+
+Each page can carry an `eyebrow`, `bullets`, a `background` (colour, gradient, material or
+image), and its own `foreground`, `accent` and `onAccent`; Skip, Back, the indicator and the
+button take on the current page's colours as you swipe. Transitions track the swipe itself, and
+Reduce Motion swaps cube, zoom and parallax for a fade.
+
 **Gate app entry with it, using KitoNavigation's full-screen cover:**
 ```swift
 .onAppear {
