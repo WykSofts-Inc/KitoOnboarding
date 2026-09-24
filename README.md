@@ -67,6 +67,13 @@ let onboarding = KitoOnboardingViewModel(pages: pages, onFinish: {
 })
 ```
 
+## Right-to-left
+
+- The pager is a horizontal scroll view, so pages, swipes, parallax and page transitions mirror automatically:
+  in Arabic or Hebrew the next page comes in from the left.
+- The back chevron and the next arrows use `chevron.backward` / `arrow.forward`, so they point the right way.
+- Nothing extra to do in your app.
+
 ## License
 
 MIT
