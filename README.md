@@ -1,5 +1,7 @@
 # KitoOnboarding
 
+**[Documentation](https://wyksofts-inc.github.io/KitoOnboarding/documentation/kitoonboarding/)**
+
 A paged, swipeable onboarding flow — themed, skip-able, with an animated
 page indicator.
 
