@@ -141,7 +141,7 @@ public struct KitoOnboardingView: View {
             HStack {
                 if style.showsBackButton && !viewModel.isFirstPage {
                     Button(action: viewModel.goBack) {
-                        Image(systemName: "chevron.left")
+                        Image(systemName: "chevron.backward")
                             .font(.system(size: 16, weight: .semibold))
                             .frame(width: 40, height: 40)
                             .background(.ultraThinMaterial, in: Circle())
@@ -154,7 +154,7 @@ public struct KitoOnboardingView: View {
                 if !viewModel.isLastPage {
                     if style.buttonPlacement == .topTrailingCompact {
                         Button(action: viewModel.advance) {
-                            Image(systemName: "arrow.right")
+                            Image(systemName: "arrow.forward")
                                 .font(.system(size: 16, weight: .bold))
                                 .foregroundStyle(onAccent)
                                 .frame(width: 40, height: 40)
@@ -581,7 +581,7 @@ struct ProgressRingButton: View {
                 if isLast {
                     Text(labels.getStarted).font(font).foregroundStyle(onAccent).transition(.opacity)
                 } else {
-                    Image(systemName: "arrow.right").font(.system(size: 20, weight: .bold)).foregroundStyle(onAccent).transition(.opacity)
+                    Image(systemName: "arrow.forward").font(.system(size: 20, weight: .bold)).foregroundStyle(onAccent).transition(.opacity)
                 }
             }
             .frame(maxWidth: isLast ? .infinity : 56)
